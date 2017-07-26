@@ -1,0 +1,26 @@
+﻿@page
+@model FlushingModel
+@{
+    ViewData["Title"] = "Flushing Todo";
+}
+
+<h1>Flushing Todos</h1>
+
+@if (Model.UserId.HasValue)
+{
+    <p>Filtered to user <strong>@Model.UserId</strong>.</p>
+}
+else
+{
+    <p>Showing TODOs for all users.</p>
+}
+
+@section AfterRenderBody {
+    @*Anything that you want to be run *after* the Layout has flushed must be in this section*@
+    <ul>
+        @foreach (var todo in await Model.GetTodos())
+        {
+            <li>@todo.Title <input type="checkbox" checked="@todo.Completed" readonly /></li>
+        }
+    </ul>
+}

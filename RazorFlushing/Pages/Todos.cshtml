@@ -1,0 +1,23 @@
+﻿@page
+@model TodosModel
+@{
+    ViewData["Title"] = "Todos";
+}
+
+<h1>Todos</h1>
+
+@if (Model.UserId.HasValue)
+{
+    <p>Filtered to user <strong>@Model.UserId</strong>.</p>
+}
+else
+{
+    <p>Showing TODOs for all users.</p>
+}
+
+<ul>
+    @foreach (var todo in Model.Todos)
+    {
+        <li>@todo.Title <input type="checkbox" checked="@todo.Completed" readonly /></li>
+    }
+</ul>
